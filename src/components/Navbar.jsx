@@ -1,13 +1,14 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
-import Dropdown from "./Dropdown";
+import Dropdown from "./utils/Dropdown.jsx";
+import Logo from "../assets/logo.png";
 
 const Navbar = () => {
   const navItems = [
     { label: "Refer & Earn", href: "#" },
-    { label: "Resources", href: "#" },
-    { label: "About us", href: "#" },
+    { label: "Resources", href: "https://blog.accredian.com/" },
+    { label: "About us", href: "https://accredian.com/About" },
   ];
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const toggleNavbar = () => {
@@ -20,17 +21,19 @@ const Navbar = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center flex-shrink-0 space-x-5">
               {/* Logo */}
-              <span className="text-xl tracking-tight text-primaryBlue">
-                accredian
-              </span>
-              {/* Dropdown */}
-              <Dropdown />
+              <img className="w-15 h-10" src={Logo} alt="" />
+              {/* Dropdown for larger screens */}
+              <div className="hidden lg:block">
+                <Dropdown />
+              </div>
             </div>
             {/* Nav links */}
             <ul className="hidden lg:flex ml-14 space-x-12">
               {navItems.map((item, index) => (
                 <li key={index}>
-                  <a href={item.href}>{item.label}</a>
+                  <a target="_blank" href={item.href}>
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>

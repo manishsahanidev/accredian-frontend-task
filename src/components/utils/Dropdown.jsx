@@ -39,9 +39,15 @@ const Dropdown = () => {
           "aria-labelledby": "courses-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Course 1</MenuItem>
-        <MenuItem onClick={handleClose}>Course 2</MenuItem>
-        <MenuItem onClick={handleClose}>Course 3</MenuItem>
+        <MenuItem onClick={handleClose}>Product Management</MenuItem>
+        <MenuItem onClick={handleClose}>Strategy & Leadership</MenuItem>
+        <MenuItem onClick={handleClose}>Business Management</MenuItem>
+        <MenuItem onClick={handleClose}>Fintech</MenuItem>
+        <MenuItem onClick={handleClose}>Senior Management</MenuItem>
+        <MenuItem onClick={handleClose}>Project Management</MenuItem>
+        <MenuItem onClick={handleClose}>Digital Transformation</MenuItem>
+        <MenuItem onClick={handleClose}>Data Science</MenuItem>
+        <MenuItem onClick={handleClose}>Business Analytics</MenuItem>
       </Menu>
     </div>
   );
