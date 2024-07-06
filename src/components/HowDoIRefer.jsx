@@ -4,7 +4,7 @@ import HandshakeIcon from "@mui/icons-material/Handshake";
 import { useState } from "react";
 import ReferralModal from "./ReferralModal";
 
-const FeatureSection = () => {
+const HowDoIRefer = () => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -59,11 +59,11 @@ const FeatureSection = () => {
           >
             Refer Now
           </button>
-          <ReferralModal open={open} handleClose={handleClose} />
         </div>
       </div>
+      <ReferralModal open={open} handleClose={handleClose} />
     </div>
   );
 };
 
-export default FeatureSection;
+export default HowDoIRefer;
