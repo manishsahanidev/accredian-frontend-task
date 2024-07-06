@@ -1,8 +1,14 @@
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import SaveAsIcon from "@mui/icons-material/SaveAs";
 import HandshakeIcon from "@mui/icons-material/Handshake";
+import { useState } from "react";
+import ReferralModal from "./ReferralModal";
 
 const FeatureSection = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const features = [
     {
       id: 1,
@@ -47,9 +53,13 @@ const FeatureSection = () => {
           </dl>
         </div>
         <div className="flex justify-center mt-8">
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+          <button
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            onClick={handleOpen}
+          >
             Refer Now
           </button>
+          <ReferralModal open={open} handleClose={handleClose} />
         </div>
       </div>
     </div>

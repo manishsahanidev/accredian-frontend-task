@@ -102,7 +102,11 @@ const Benefits = () => {
         </Typography>
         <Divider sx={{ mb: 4 }} />
 
-        <Grid container spacing={4}>
+        <Grid
+          container
+          spacing={4}
+          sx={{ bgcolor: "whitesmoke", borderRadius: "14px" }}
+        >
           <Grid item xs={11} md={3}>
             <Box
               sx={{
