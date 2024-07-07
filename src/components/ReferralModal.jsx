@@ -46,7 +46,7 @@ const ReferralModal = ({ open, handleClose }) => {
     if (validate()) {
       try {
         const response = await axios.post(
-          "http://localhost:5001/api/referrals",
+          "https://accredian-backend-task-lku6.onrender.com",
           formData
         );
         console.log(response.data);
