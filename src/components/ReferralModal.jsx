@@ -1,6 +1,62 @@
+import React, { useState } from "react";
 import { Box, Modal, TextField, Button } from "@mui/material";
+import axios from "axios";
 
 const ReferralModal = ({ open, handleClose }) => {
+  const [formData, setFormData] = useState({
+    referrerName: "",
+    referrerEmail: "",
+    friendName: "",
+    friendEmail: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const validate = () => {
+    let tempErrors = {};
+    tempErrors.referrerName = formData.referrerName
+      ? ""
+      : "This field is required.";
+    tempErrors.referrerEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+      formData.referrerEmail
+    )
+      ? ""
+      : "Email is not valid.";
+    tempErrors.friendName = formData.friendName
+      ? ""
+      : "This field is required.";
+    tempErrors.friendEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+      formData.friendEmail
+    )
+      ? ""
+      : "Email is not valid.";
+    setErrors(tempErrors);
+    return Object.values(tempErrors).every((x) => x === "");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validate()) {
+      try {
+        const response = await axios.post(
+          "http://localhost:5001/api/referrals",
+          formData
+        );
+        console.log(response.data);
+        handleClose();
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
+    }
+  };
+
   return (
     <Modal
       open={open}
@@ -27,17 +83,59 @@ const ReferralModal = ({ open, handleClose }) => {
         >
           Refer a Friend
         </h2>
-        <form className="space-y-4">
-          <TextField fullWidth label="Your Name" variant="outlined" />
-          <TextField fullWidth label="Friend's Email" variant="outlined" />
-          <TextField fullWidth label="Friend's Name" variant="outlined" />
-          <Button
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <TextField
             fullWidth
-            variant="contained"
-            color="primary"
-            onClick={handleClose}
-          >
-            Submit
+            label="Your Name"
+            variant="outlined"
+            name="referrerName"
+            value={formData.referrerName}
+            onChange={handleChange}
+            {...(errors.referrerName && {
+              error: true,
+              helperText: errors.referrerName,
+            })}
+          />
+          <TextField
+            fullWidth
+            label="Your Email"
+            variant="outlined"
+            name="referrerEmail"
+            type="email"
+            value={formData.referrerEmail}
+            onChange={handleChange}
+            {...(errors.referrerEmail && {
+              error: true,
+              helperText: errors.referrerEmail,
+            })}
+          />
+          <TextField
+            fullWidth
+            label="Friend's Name"
+            variant="outlined"
+            name="friendName"
+            value={formData.friendName}
+            onChange={handleChange}
+            {...(errors.friendName && {
+              error: true,
+              helperText: errors.friendName,
+            })}
+          />
+          <TextField
+            fullWidth
+            label="Friend's Email"
+            variant="outlined"
+            name="friendEmail"
+            type="email"
+            value={formData.friendEmail}
+            onChange={handleChange}
+            {...(errors.friendEmail && {
+              error: true,
+              helperText: errors.friendEmail,
+            })}
+          />
+          <Button fullWidth variant="contained" color="primary" type="submit">
+            Send Refer
           </Button>
         </form>
       </Box>

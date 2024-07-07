@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Typography, Button, Modal, Grid } from "@mui/material";
+import { Box, Typography, Button, Modal } from "@mui/material";
 import ReferralModal from "./ReferralModal";
 import referImage from "../assets/referImage.png";
 
@@ -33,7 +33,6 @@ const ReferEarn = () => {
           justifyContent: "center",
           alignItems: "flex-start",
           color: "black",
-
           gap: "16px",
           ml: 4,
           mb: { xs: 2, md: 0 },
